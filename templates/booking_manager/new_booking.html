@@ -1,0 +1,57 @@
+{% extends "booking_manager/base.html" %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4"> New Booking</h2>
+    <div class="row g-4">
+        <div class="col-12 col-md-8">
+            <div class="p-4 border rounded shadow-sm bg-white">
+                <h4 class="mb-3 fw-bold">Application Form</h4>
+                <form>
+              <div class="mb-3">
+                  <label class="form-label">Your Name</label>
+                  <input type="text" class="form-control" placeholder="Enter your name">
+              </div>
+              <div class="mb-3">
+                  <label class="form-label">Select Service</label>
+                  <select class="form-select">
+                      <option>Choose service...</option>
+                      <option>Haircut</option>
+                      <option>Manicure</option>
+                      <option>Massage</option>
+                      <option>Consultation</option>
+                  </select>
+              </div>
+              <a href="{% url 'bookings' %}" class="btn btn-primary w-100">Submit Booking</a>
+          </form>
+      </div>
+    </div>
+   <div class="col-12 col-md-4">
+      <div class="card h-100 shadow-sm border-primary">
+          <div class="card-body">
+              <h5 class="card-title fw-bold text-primary">Booking Information</h5>
+              <p class="card-text text-muted small mt-3">Please follow these simple steps to book a service:</p>
+              <ol class="small text-muted ps-3">
+                  <li class="mb-2">Fill in your name in the form.</li>
+                  <li class="mb-2">Select the desired service.</li>
+                  <li class="mb-2">Click submit button to confirm.</li>
+              </ol>
+          </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

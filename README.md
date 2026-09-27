@@ -1,1 +1,1 @@
-# first_django_project
+# booking_service
