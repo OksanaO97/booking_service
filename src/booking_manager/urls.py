@@ -1,11 +1,15 @@
 
 from django.urls import path
-from .views import main_view, schedule_view
+from .views import services, home, specialists, bookings, new_booking
 
 urlpatterns = [
-    path('brils/', main_view),
-    path('schedule/', schedule_view),
+    path('services/', services, name = 'services'),
+    path('home/', home, name = 'homepage'),
+    path('specialists/', specialists, name = 'specialists'),
+    path('bookings/', bookings, name = 'bookings'),
+    path('newbooking/', new_booking, name = 'new_booking')
+
+
+
 ]
 
-#/booking_manager/brils/
-#/booking_manager/schedule/
