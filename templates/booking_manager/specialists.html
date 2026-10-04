@@ -1,0 +1,29 @@
+{% extends "booking_manager/base.html" %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Our Specialists</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {%for specialist in specialists%}
+        <div class="col">
+             <div class="card h-100 text-center shadow-sm">
+                  <div class="bg-secondary text-white py-4 rounded-top">
+                    <span style="font-size: 2rem;"></span>
+                </div>
+                 <div class="card-body">
+                     <h5 class="card-title fw-bold">{{ specialist.name }}</h5>
+                     <p class="card-text text-primary mb-2">{{ specialist.speciality }}</p>
+                     <p class="card-text text-muted small"> Experience: {{ specialist.experience }} years</p>
+                     </div>
+
+                <div class="card-footer bg-transparent border-top-0 pb-3">
+                    <a href="{% url 'new_booking' %}" class="btn btn-outline-primary btn-sm w-100">Book Now</a>
+                </div>
+            </div>
+
+        </div>
+        {% empty %}
+        <p class="text-center">No specialists found.</p>
+        {% endfor %}
+           </div>
+</div>
+{% endblock %}

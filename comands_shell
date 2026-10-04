@@ -1,0 +1,94 @@
+Команды, которые мы на уроке прописывали в shell на уроке
+Заполнение таблицы данными
+book1 = Booking(name = 'book1', price = 500.30)
+book1.save()
+
+Чтобы поменять сумму
+book1.price = 22.22
+
+чтобы посмотреть новую цену
+book1.price
+
+но чтобы полетело в базу надо сделать
+book1.save()
+
+Чтобы при каждом действии не писать book1.save(), а оно сразу сохраняло в базу
+Импортируем категории
+from src.booking_manager.constants import CategoryChoices
+book
+qs
+Если мы выходили и обратно заходили в шел, чтобы дальше работать с нашими данными
+book2 = Booking.objects.get(name='book2')
+
+Чтобы сработал валидатор
+Создаем объект только в памяти (без .create())
+bad_book = Booking.objects.new(name='book4', price=-10.0, category=CategoryChoices.BEARD)
+Принудительно запускаем валидаторищщ
+bad_book.full_clean()
+
+Чтобы сделать QuerySet:
+qs = Booking.objects.all()
+qs
+
+Чтобы пройти по каждой моделе и посмотреть значения ее полей
+In [21]: for book in qs:
+    ...:     print(book.name, book.price, book.is_active)
+
+Чтобы взять конкретную запись
+book1 = qs[0]
+book1
+
+Одну запись мы можем получить через метод get
+book2 = Booking.objects.get(name = 'book1')
+
+Можно посмотреть последнюю запись
+qs = Booking.objects.last()
+qs
+
+Первый по времени создания
+qs = Booking.objects.first()
+qs
+
+update работает на все записи через qs
+qs = Booking.objects.update(is_active = False)
+
+чтобы удалить конкретную запись
+qs = Booking.objects.filter(id=3).delete()
+
+Чтобы отфильтровать по конкретному полю
+qs = Booking.objects.filter(name = 'book1')
+
+Чтобы сделать фильтр по нескольким полям. __isnull наз. look up
+qs = Booking.objects.filter(is_active = True, description__isnull = False)
+
+Чтобы найти запись, где стоимотсь больше 40
+qs = Booking.objects.filter(price__gte=40)
+
+Меньше или равно
+qs = Booking.objects.filter(price__lte=40)
+
+Строго меньше
+qs = Booking.objects.filter(price__lt=40)
+
+Строго больше
+qs = Booking.objects.filter(price__gt=100)
+
+Значение между, указываем начало и конец
+qs = Booking.objects.filter(price__range=(20, 50))
+
+Вхождение какое-то
+qs = Booking.objects.filter(category__in=("CategoryChoices.MASSAGE", "CategoryChoices.BEARD"))
+
+Чтобы показало только первые 3 записи
+qs = Booking.objects.filter(price__range=(20, 50))[:3]
+
+Чтобы взяло после 1 записи еще 2
+qs = Booking.objects.filter(price__range=(20, 50))[1:3]
+
+Чтоы посмотреть соответствие дате
+qs = Booking.objects.filter(created_at__month__gte=9)
+
+Чтобы найти бронирования, в названии которых содержится строка "стрижка" без учёта регистра.
+qs = Booking.objects.filter(name__icontains="haircut")
+
+
