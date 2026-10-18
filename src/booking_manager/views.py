@@ -1,4 +1,6 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, get_object_or_404
+from booking_manager.models import Booking
+from account.models import Barber
 
 def home(request):
     template_name = 'booking_manager/home.html'
@@ -20,28 +22,32 @@ def services(request):
 
 def specialists(request):
     template_name = 'booking_manager/specialists.html'
-    specialists_list = [
-    {"id": 1, "name": "Alice Brown", "speciality": "Hair Stylist", "experience": 5},
-    {"id": 2, "name": "Bob Smith", "speciality": "Barber", "experience": 7},
-    {"id": 3, "name": "Diana Green", "speciality": "Nail Artist", "experience": 3},
-    {"id": 4, "name": "Charlie White", "speciality": "Massage Therapist", "experience": 6}
-    ]
-    context = {'specialists': specialists_list}
+    context = {
+        'specialists': Barber.objects.select_related('user').prefetch_related('comments__client__user').all()
+    }
     return render(request, template_name=template_name, context=context)
 
 
 def bookings(request):
     template_name = 'booking_manager/bookings.html'
-    bookings_list = [
-    {"client": "John", "service": "Haircut", "date": "20.09.2026", "time": "12:00", "status": "confirmed"},
-    {"client": "Anna", "service": "Manicure", "date": "20.09.2026", "time": "14:30", "status": "pending"},
-    {"client": "Mike", "service": "Massage", "date": "21.09.2026", "time": "10:00", "status": "confirmed"},
-    {"client": "Kate", "service": "Consultation", "date": "22.09.2026", "time": "16:00", "status": "cancelled"}
-    ]
-    context = {'bookings': bookings_list}
+    context = {
+        "bookings": Booking.objects.all_optimize().get_upcoming()
+    }
     return render(request, template_name=template_name, context=context)
 
 
 def new_booking(request):
     template_name = 'booking_manager/new_booking.html'
     return render(request, template_name=template_name)
+
+
+def detail_view(request, booking_id):
+    template_name = 'booking_manager/detail_view.html'
+    booking_item = get_object_or_404(Booking.objects.all_optimize(),id=booking_id)
+    context = {
+        'booking': booking_item
+    }
+    return render(request, template_name=template_name, context=context)
+
+
+

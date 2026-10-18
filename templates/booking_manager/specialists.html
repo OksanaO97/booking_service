@@ -10,12 +10,25 @@
                     <span style="font-size: 2rem;"></span>
                 </div>
                  <div class="card-body">
-                     <h5 class="card-title fw-bold">{{ specialist.name }}</h5>
-                     <p class="card-text text-primary mb-2">{{ specialist.speciality }}</p>
-                     <p class="card-text text-muted small"> Experience: {{ specialist.experience }} years</p>
+                     <h5 class="card-title fw-bold">{{ specialist.user.first_name }}</h5>
+                     <p class="card-text text-muted small"> Experience: {{ specialist.experience_year }} years</p>
+                     <hr>
+                     <h6 class="fw-bold text-start mb-2" style="font-size: 0.9rem;">Comments:</h6>
+                     <div class="text-start" style="max-height: 150px; overflow-y: auto;">
+                         {%for comment in specialist.comments.all%}
+                         <div class="p-2 mb-2 bg-light rounded" style="font-size: 0.85rem; border-left: 3px solid #6c757d;">
+                                 <div class="d-flex justify-content-between text-muted small">
+                                     <strong>{{ comment.client.user.first_name }}</strong>
+                                     <span>{{ comment.rating }}★</span>
+                                 </div>
+                             <p class="mb-0 text-secondary">«{{ comment.text }}»</p>
+                         </div>
+                         {% empty %}
+                         <p class="text-muted small fst-italic text-center">No reviews yet.</p>
+                         {% endfor %}
                      </div>
-
-                <div class="card-footer bg-transparent border-top-0 pb-3">
+                 </div>
+                 <div class="card-footer bg-transparent border-top-0 pb-3">
                     <a href="{% url 'new_booking' %}" class="btn btn-outline-primary btn-sm w-100">Book Now</a>
                 </div>
             </div>

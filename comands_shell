@@ -92,3 +92,75 @@ qs = Booking.objects.filter(created_at__month__gte=9)
 qs = Booking.objects.filter(name__icontains="haircut")
 
 
+Создаем нового пользователя
+Шифруем пароль с помощью нашей функции для этого
+User.objects.create_user('client1@client.com', 'client1')
+User.objects.create_user('barber2@barber.com', 'barber2')
+
+Чтобы из пользователя создать клиента:
+Получаем первого пользователя
+
+user = User.objects.get(email = 'client1@client.com')
+Создаем клиента
+Client.objects.create(user=user)
+
+Создаем  барбера
+user = User.objects.get(email = 'barber2@barber.com')
+Barber.objects.create(user=user, experience_year = 5)
+
+Создаем услугу:
+BookingService.objects.create(name = 'Стрижка одной насадкой', price = 15, duration_minute = 15)
+
+Реализуем само бронирование
+Для начала получим клиента
+client1 = Client.objects.get(user__email = 'client1@client.com')
+Также получаем барбера
+barber1 = Barber.objects.get(user__email = 'barber1@barber.com')
+Получаем услугу
+booking_service1 = BookingService.objects.get(id = 1)
+Создаем бронирование
+Booking.objects.create(name = 'Бронирование1', booking_service = booking_service1, barber = barber1, client = client1)
+
+Получаем все бронирования
+bookings = Booking.objects.all()
+
+Чтобы посмотреть статус клиента через бронирования
+bookings[1].client.status
+
+Чтобы через клиента посмотреть эмейл
+bookings[1].client.user.email
+
+Чтобы посмотреть услугу через бронирования
+bookings[1].booking_service
+Или наименование услуги
+bookings[1].booking_service.name
+
+Чтобы с клиента посмотреть все свои звказы
+client1.bookings.all()
+
+Можно тогда любой фильтр делать
+client1.bookings.filter(name__startswith = 'Бро')
+
+Чтобы добраться через бронироние до пользователя с такой почтой и узнать его бронирования
+book1 = client1.bookings.filter(barber__user__email = 'barber1@barber.com')
+
+чтобы через барбера получить эмеил пользователя
+barber2 = Barber.objects.get(id = 2)
+barber2.user.email
+
+Чтобы получить бронирования, связанные с барбером2
+bookings = client1.bookings.filter(barber = barber2)
+
+Посоздаем бронирования
+bookings = Booking.objects.create(name = 'book3')
+
+Посмотрим все наши бронирования
+bookings = Booking.objects.all()
+bookings
+
+Чтоб добавить продукты в бронирование
+product = Product.objects.last()
+booking[0].products.add(product)
+
+Чтобы проверить все продукты в конкретном бронировании
+bookings[0].products.all()
