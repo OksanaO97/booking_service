@@ -1,0 +1,203 @@
+2) Добавить 8-10 объектов для каждой модели в проекте.
+Добавляем 10 объектов в barbershop
+from booking_manager.models import Barbershop
+barbershop1 = Barbershop.objects.create(name='Brils', address='Минск, ул. Советская, 19', phone='+375 (29) 423-23-57', description='Территория стиля')
+barbershop2 = Barbershop.objects.create(name='Bronx', address='Минск, ул. Куйбышева, 15', phone='+375 (29) 452-23-57')
+barbershop3 = Barbershop.objects.create(name='Bront1', address='Минск, пр. Победы, 25', phone='+375 (29) 452-24-57', description='Флагманский филиал в самом сердце столицы')
+barbershop4 = Barbershop.objects.create(name='Bront2', address='Минск, пр-т Независимости, 28', phone='+375 (29) 452-44-47', description='Пространство со строгим мужским характером в стиле индастриал')
+barbershop5 = Barbershop.objects.create(name='Bront3', address='Минск, ул. Октябрьская, 16', phone='+375 (44) 454-44-47', description='Трендовый барбершоп на культовой улице Октябрьской')
+barbershop6 = Barbershop.objects.create(name='Bront6', address='Минск, пр-т Победителей, 9', phone='+375 (44) 954-47-47', description='Современная студия мужского стиля с панорамным видом на проспект')
+barbershop7 = Barbershop.objects.create(name='Bront7', address='Минск, ул. Зыбицкая, 6', phone='+375 (29) 954-47-47', description='Семейный филиал с легкой и дружеской атмосфевой')
+barbershop8 = Barbershop.objects.create(name='Bront8', address='Минск, ул. Интернациональная, 25', phone='+375 (29) 955-48-41', description='Территория безупречного стиля и эстетики')
+barbershop9 = Barbershop.objects.create(name='Bront9', address='Минск, ул. Петра Мстиславца, 11', phone='+375 (44) 407-48-41', description='Компактный и душевный барбершоп в современном районе')
+barbershop10 = Barbershop.objects.create(name='Bront10', address='Минск, пр-т Дзержинского, 119', phone='+375 (44) 411-48-41', description='Андеграундное пространство', is_active=False)
+
+Добавляем 20 пользователей
+from account.models import User
+user1 = User.objects.create_user(email='client1@client', password='client1', username='client1', phone='+375 (29) 713-23-13', first_name='Иван', last_name='Иванов')
+user2 = User.objects.create_user(email='client2@client', password='client2', username='client2', phone='+375 (29) 111-22-02', first_name='Александр', last_name='Петров')
+user3 = User.objects.create_user(email='client3@client', password='client3', username='client3', phone='+375 (29) 222-33-03', first_name='Дмитрий', last_name='Сидоров')
+user4 = User.objects.create_user(email='client4@client', password='client4', username='client4', phone='+375 (29) 333-44-04', first_name='Максим', last_name='Кузнецов')
+user5 = User.objects.create_user(email='client5@client', password='client5', username='client5', phone='+375 (29) 444-55-05', first_name='Сергей', last_name='Попов')
+user6 = User.objects.create_user(email='client6@client', password='client6', username='client6', phone='+375 (29) 555-66-06', first_name='Андрей', last_name='Васильев')
+user7 = User.objects.create_user(email='client7@client', password='client7', username='client7', phone='+375 (29) 666-77-07', first_name='Алексей', last_name='Соколов')
+user8 = User.objects.create_user(email='client8@client', password='client8', username='client8', phone='+375 (29) 777-88-08', first_name='Артем', last_name='Михайлов')
+user9 = User.objects.create_user(email='client9@client', password='client9', username='client9', phone='+375 (29) 888-99-09', first_name='Игорь', last_name='Новиков')
+user10 = User.objects.create_user(email='client10@client', password='client10', username='client10', phone='+375 (29) 999-00-10', first_name='Владимир', last_name='Федоров')
+user11 = User.objects.create_user(email='barber1@barber', password='barber1', username='barber1', phone='+375 (29) 111-11-11', first_name='Михаил', last_name='Козлов')
+user12 = User.objects.create_user(email='barber2@barber', password='barber2', username='barber2', phone='+375 (29) 222-22-22', first_name='Егор', last_name='Морозов')
+user13 = User.objects.create_user(email='barber3@barber', password='barber3', username='barber3', phone='+375 (29) 333-33-33', first_name='Денис', last_name='Волков')
+user14 = User.objects.create_user(email='barber4@barber', password='barber4', username='barber4', phone='+375 (29) 444-44-44', first_name='Павел', last_name='Лебедев')
+user15 = User.objects.create_user(email='barber5@barber', password='barber5', username='barber5', phone='+375 (29) 555-55-55', first_name='Роман', last_name='Семенов')
+user16 = User.objects.create_user(email='barber6@barber', password='barber6', username='barber6', phone='+375 (29) 666-66-66', first_name='Никита', last_name='Поляков')
+user17 = User.objects.create_user(email='barber7@barber', password='barber7', username='barber7', phone='+375 (29) 777-77-77', first_name='Илья', last_name='Степанов')
+user18 = User.objects.create_user(email='barber8@barber', password='barber8', username='barber8', phone='+375 (29) 888-88-88', first_name='Олег', last_name='Ушаков')
+user19 = User.objects.create_user(email='barber9@barber', password='barber9', username='barber9', phone='+375 (29) 999-99-99', first_name='Владислав', last_name='Белов')
+user20 = User.objects.create_user(email='barber10@barber', password='barber10', username='barber10', phone='+375 (29) 000-00-00', first_name='Тимур', last_name='Жуков')
+
+
+Добавляем 10 клиентов
+from account.models import Client
+client1 = Client.objects.create(status='noob', date_of_birth='2000-11-13', user=user1)
+client2 = Client.objects.create(status='beginner', date_of_birth='1995-04-25', user=user2)
+client3 = Client.objects.create(status='expert', date_of_birth='1988-12-05', user=user3)
+client4 = Client.objects.create(status='legend', date_of_birth='1999-07-14', user=user4)
+client5 = Client.objects.create(status='noob', date_of_birth='2002-01-20', user=user5)
+client6 = Client.objects.create(status='beginner', date_of_birth='1993-09-30', user=user6)
+client7 = Client.objects.create(status='expert', date_of_birth='1991-03-17', user=user7)
+client8 = Client.objects.create(status='legend', date_of_birth='1996-06-22', user=user8)
+client9 = Client.objects.create(status='noob', date_of_birth='2004-10-10', user=user9)
+client10 = Client.objects.create(status='expert', date_of_birth='1997-05-18', user=user10)
+
+Добавляем 10 барберов
+from account.models import Barber
+barber1 = Barber.objects.create(experience_year=2, rating=4.5, user=user11, barbershop_id=3)
+barber2 = Barber.objects.create(experience_year=5, rating=5.0, user=user12, barbershop_id=1)
+barber3 = Barber.objects.create(experience_year=1, rating=3.8, user=user13, barbershop_id=7)
+barber4 = Barber.objects.create(experience_year=3, rating=4.2, user=user14, barbershop_id=10)
+barber5 = Barber.objects.create(experience_year=4, rating=4.9, user=user15, barbershop_id=2)
+barber6 = Barber.objects.create(experience_year=2, rating=4.0, user=user16, barbershop_id=5)
+barber7 = Barber.objects.create(experience_year=5, rating=4.7, user=user17, barbershop_id=8)
+barber8 = Barber.objects.create(experience_year=3, rating=3.5, user=user18, barbershop_id=4)
+barber9 = Barber.objects.create(experience_year=1, rating=4.1, user=user19, barbershop_id=6)
+barber10 = Barber.objects.create(experience_year=4, rating=4.6, user=user20, barbershop_id=9)
+
+Добавляем 10 услуг
+
+from booking_manager.models import BookingService
+bs1 = BookingService.objects.create(category="haircut", name='Детская стрижка', description='Аккуратный срез для юных джентльменов до 12 лет.', price=40, duration_minute=30)
+bs2 = BookingService.objects.create(category="haircut", name='Мужская стрижка', description='Классическая стрижка ножницами и машинкой с мытьем головы.', price=55, duration_minute=45)
+bs3 = BookingService.objects.create(category="haircut", name='Стрижка под машинку', description='Стильная и быстрая стрижка с использованием одной или двух насадок.', price=30, duration_minute=20)
+bs4 = BookingService.objects.create(category="beard", name='Моделирование бороды', description='Создание четких контуров бороды с подбриванием опасной бритвой.', price=35, duration_minute=30)
+bs5 = BookingService.objects.create(category="beard", name='Камуфляж бороды', description='Тонирование седины и придание бороде визуальной густоты.', price=25, duration_minute=25)
+bs6 = BookingService.objects.create(category="moustache", name='Стрижка усов', description='Коррекция формы и длины усов под ваш стиль.', price=15, duration_minute=15)
+bs7 = BookingService.objects.create(category="massage", name='Массаж головы', description='Расслабляющий массаж со специальными тонизирующими лосьонами.', price=20, duration_minute=15)
+bs8 = BookingService.objects.create(category="massage", name='Массаж лица', description='Лимфодренажный массаж лица после бритья для снятия раздражения.', price=30, duration_minute=20)
+bs9 = BookingService.objects.create(category="haircut", name='Комплекс: Стрижка + Борода', description='Полное обновление образа. Выгодный премиум-пакет.', price=80, duration_minute=75)
+bs10 = BookingService.objects.create(category="haircut", name='Королевское бритье', description='Традиционное бритье опасной бритвой с распариванием горячим полотенцем.', price=50, duration_minute=45)
+
+Создаем 10 бронирований
+
+from booking_manager.models import Booking
+booking1 = Booking.objects.create(name='Запись №1', visit_time='2026-10-21 10:00', booking_service=bs1, barber=barber1, client=client1)
+booking2 = Booking.objects.create(name='Запись №2', visit_time='2026-10-21 12:30', booking_service=bs4, barber=barber3, client=client2)
+booking3 = Booking.objects.create(name='Запись №3', visit_time='2026-10-22 14:00', booking_service=bs2, barber=barber2, client=client3)
+booking4 = Booking.objects.create(name='Запись №4', visit_time='2026-10-22 16:15', booking_service=bs9, barber=barber5, client=client4)
+booking5 = Booking.objects.create(name='Запись №5', visit_time='2026-10-23 11:00', booking_service=bs3, barber=barber4, client=client5)
+booking6 = Booking.objects.create(name='Запись №6', visit_time='2026-10-23 18:00', booking_service=bs6, barber=barber8, client=client6)
+booking7 = Booking.objects.create(name='Запись №7', visit_time='2026-10-24 13:00', booking_service=bs5, barber=barber6, client=client7)
+booking8 = Booking.objects.create(name='Запись №8', visit_time='2026-10-24 15:30', booking_service=bs10, barber=barber10, client=client8)
+booking9 = Booking.objects.create(name='Запись №9', visit_time='2026-10-25 10:30', booking_service=bs7, barber=barber7, client=client9)
+booking10 = Booking.objects.create(name='Запись №10', visit_time='2026-10-25 17:00', booking_service=bs8, barber=barber9, client=client10)
+
+Создаем 10 комментариев
+comment1 = Comment.objects.create(text='Топ!', rating=5, client=client1, barber=barber1, booking=booking1)
+comment2 = Comment.objects.create(text='Хороший мастер', rating=4, client=client2, barber=barber2, booking=booking2)
+comment3 = Comment.objects.create(text='Отличный сервис', rating=5, client=client3, barber=barber3, booking=booking3)
+comment4 = Comment.objects.create(text='Долго', rating=3, client=client4, barber=barber4, booking=booking4)
+comment5 = Comment.objects.create(text='Стрижка супер!', rating=5, client=client5, barber=barber5, booking=booking5)
+comment6 = Comment.objects.create(text='Отличный сервис', rating=5, client=client6, barber=barber6, booking=booking6)
+comment7 = Comment.objects.create(text='Все понравилось', rating=5, client=client7, barber=barber7, booking=booking7)
+comment8 = Comment.objects.create(text='Неплохо', rating=4, client=client8, barber=barber8, booking=booking8)
+comment9 = Comment.objects.create(text='Стрижка супер!', rating=5, client=client9, barber=barber9, booking=booking9)
+comment10 = Comment.objects.create(text='Норм', rating=4, client=client10, barber=barber10, booking=booking10)
+
+Создаем 10 продуктов
+
+from booking_manager.models import Product
+product1 = Product.objects.create(name='Масло для бороды Borodach', description='Питает жесткие волосы, придает легкий блеск цитруса.', price=35, amount=20)
+product2 = Product.objects.create(name='Тонизирующий шампунь с ментолом', description='Глубокое очищение кожи головы и мощный заряд свежести.', price=28, amount=50)
+product3 = Product.objects.create(name='Паста для укладки матовая', description='Сильная фиксация без лишнего блеска для современных стрижек.', price=42, amount=30)
+product4 = Product.objects.create(name='Гель для усов сильной фиксации', description='Мягкая текстура, надежно держит форму усов весь день.', price=15, amount=40)
+product5 = Product.objects.create(name='Бальзам после бритья с алоэ', description='Мгновенно снимает раздражение и заживляет мелкие порезы.', price=30, amount=25)
+product6 = Product.objects.create(name='Одеколон по мотивам табака и ванили', description='Премиальный стойкий аромат истинно мужского характера.', price=65, amount=15)
+product7 = Product.objects.create(name='Профессиональный гребень из дуба', description='Антистатический деревянный гребень ручной работы.', price=22, amount=10)
+product8 = Product.objects.create(name='Скраб для лица угольный', description='Глубоко очищает поры и подготавливает кожу к гладкому бритью.', price=25, amount=35)
+product9 = Product.objects.create(name='Пена для бритья смягчающая', description='Плотная пена с экстрактом сандала для идеального скольжения.', price=18, amount=45)
+product10 = Product.objects.create(name='Глина для текстурных укладок', description='Пластичная фиксация и подчеркнутый объем волос.', price=40, amount=28)
+
+Заполняем таблицу продукты_бронирвоания
+
+from booking_manager.models import ProductBooking
+pb1 = ProductBooking.objects.create(product=product1, booking=booking1, quantity=1, total_price=35.0)
+pb2 = ProductBooking.objects.create(product=product2, booking=booking2, quantity=2, total_price=56.0)
+pb3 = ProductBooking.objects.create(product=product3, booking=booking3, quantity=1, total_price=42.0)
+pb4 = ProductBooking.objects.create(product=product4, booking=booking4, quantity=3, total_price=45.0)
+pb5 = ProductBooking.objects.create(product=product5, booking=booking5, quantity=1, total_price=30.0)
+pb6 = ProductBooking.objects.create(product=product6, booking=booking6, quantity=1, total_price=65.0)
+pb7 = ProductBooking.objects.create(product=product7, booking=booking7, quantity=2, total_price=44.0)
+pb8 = ProductBooking.objects.create(product=product8, booking=booking8, quantity=1, total_price=25.0)
+pb9 = ProductBooking.objects.create(product=product9, booking=booking9, quantity=4, total_price=72.0)
+pb10 = ProductBooking.objects.create(product=product10, booking=booking10, quantity=1, total_price=40.0)
+
+Создаем 10 акций
+from booking_manager.models import Promotion
+
+promo1 = Promotion.objects.create(name='Черная пятница', description='Скидки на все услуги', start_date='2026-11-15', end_date='2026-11-20')
+promo2 = Promotion.objects.create(name='Утренние часы', description='Скидки по будням утром', start_date='2026-10-20', end_date='2026-12-31')
+promo3 = Promotion.objects.create(name='День Рождения', description='Подарок именинникам', start_date='2026-01-01', end_date='2026-12-31')
+promo4 = Promotion.objects.create(name='Первый визит', description='Бонус для новых гостей', start_date='2026-09-01', end_date='2027-09-01')
+promo5 = Promotion.objects.create(name='Отец + Сын', description='При совместной записи', start_date='2026-10-01', end_date='2026-11-30')
+promo6 = Promotion.objects.create(name='Новый год', description='Скидки перед праздниками', start_date='2026-12-15', end_date='2026-12-31')
+promo7 = Promotion.objects.create(name='Неделя бороды', description='Акция на уход за бородой', start_date='2026-10-25', end_date='2026-11-01')
+promo8 = Promotion.objects.create(name='Студентам', description='Скидки по студенческому', start_date='2026-10-01', end_date='2027-01-01')
+promo9 = Promotion.objects.create(name='Зимний уход', description='Сезонное предложение', start_date='2026-12-01', end_date='2027-02-28')
+promo10 = Promotion.objects.create(name='Приведи друга', description='Бонусы обоим гостям', start_date='2026-10-15', end_date='2027-05-15')
+
+Создаем 10 записей акция_услуга
+from booking_manager.models import PromotionBookingService
+
+promo_bs1 = PromotionBookingService.objects.create(promotion=promo1, booking_service=bs1, discount_percent=10)
+promo_bs2 = PromotionBookingService.objects.create(promotion=promo2, booking_service=bs2, discount_percent=15)
+promo_bs3 = PromotionBookingService.objects.create(promotion=promo3, booking_service=bs3, discount_percent=20)
+promo_bs4 = PromotionBookingService.objects.create(promotion=promo4, booking_service=bs4, discount_percent=5)
+promo_bs5 = PromotionBookingService.objects.create(promotion=promo5, booking_service=bs5, discount_percent=25)
+promo_bs6 = PromotionBookingService.objects.create(promotion=promo6, booking_service=bs6, discount_percent=30)
+promo_bs7 = PromotionBookingService.objects.create(promotion=promo7, booking_service=bs7, discount_percent=12)
+promo_bs8 = PromotionBookingService.objects.create(promotion=promo8, booking_service=bs8, discount_percent=50)
+promo_bs9 = PromotionBookingService.objects.create(promotion=promo9, booking_service=bs9, discount_percent=15)
+promo_bs10 = PromotionBookingService.objects.create(promotion=promo10, booking_service=bs10, discount_percent=40)
+
+
+3) Получить все бронирования, которые сделал клиент с ID = 2.
+client2 = Client.objects.get(id=2)
+books = client2.bookings.all()
+или
+books = Booking.objects.filter(client_id=2)
+
+4) Получить все бронирования, у которых есть хотя бы один товар.
+bookings = Booking.objects.filter(products__isnull=False).distinct()
+
+5) Получить всех барберов, у которых есть хотя бы один комментарий.
+barbers = Barber.objects.filter(comments__isnull=False).distinct()
+
+6) Получить все комментарии, которые оставил клиент с ID = 3.
+comments = Comment.objects.filter(client_id=3)
+
+7) Получить все барбершопы, в которых работает хотя бы один барбер.
+barbershops = Barbershop.objects.filter(barbers__isnull=False).distinct()
+
+8) Получить все услуги, на которые действует хотя бы одна активная акция.
+bs = BookingService.objects.filter(promotions__is_active=True).distinct()
+
+9) Получить все бронирования клиентов, которые оставили хотя бы один комментарий с оценкой 5.
+bookings = Booking.objects.filter(client__comments__rating=5).distinct()
+
+10) Получить все товары, которые были добавлены в бронирования клиентов со статусом NOOB.
+products = Product.objects.filter(bookings__client__status='noob').distinct()
+
+11)	Получить все услуги, которые бронировали клиенты, оставившие хотя бы один комментарий с оценкой ниже 3.
+bs = BookingService.objects.filter(bookings__client__comments__rating__lt=3).distinct()
+
+12)	Получить все бронирования, в которых есть товар с названием «Шампунь» и которые обслуживает барбер с опытом работы больше 3 лет.
+books = Booking.objects.filter(products__name='Шампунь', barber__experience_year__gt=3).distinct()
+
+
+
+
+
+
+
+
+
+

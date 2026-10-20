@@ -1,0 +1,68 @@
+Задание 1: Создать модель задач, которую мы создали на занятии.
+Заполнить модель 10 различными бронированиями с разными категориями.
+from src.booking_manager.constants import CategoryChoices
+book1 = Booking.objects.create(name = 'Katy', price = 71.0, description = 'short hair', category = CategoryChoices.HAIRCUT, is_active = True, visit_time = '2016-10-21 15:00')
+book2 = Booking.objects.create(name = 'Ida', price = 60.0, description = 'my first visit', category = CategoryChoices.HAIRCUT, is_active = False, visit_time = '2016-10-20 11:00')
+book3 = Booking.objects.create(name = 'Tania', price = 85.4, description = 'soft massage', category = CategoryChoices.MASSAGE, is_active = True, visit_time = '2016-10-22 10:00')
+book4 = Booking.objects.create(name = 'Tom', price = 34.4, category = CategoryChoices.MASSAGE, is_active = True, visit_time = '2016-10-22 11:00')
+book5 = Booking.objects.create(name = 'Maks', price = 50.4, category = CategoryChoices.MOUSTACHE, is_active = False, visit_time = '2016-10-25 12:30')
+book6 = Booking.objects.create(name = 'Nik', price = 74.4, description = 'want a short beard', category = CategoryChoices.BEARD, is_active = False, visit_time = '2016-10-23 13:30')
+book7 = Booking.objects.create(name = 'Mila', price = 47.8, description = 'cut off the bangs', category = CategoryChoices.HAIRCUT, is_active = True, visit_time = '2016-10-26 16:20')
+book8 = Booking.objects.create(name = 'Tina', price = 48.8, description = 'I want a Thai massage', category = CategoryChoices.MASSAGE, is_active = True, visit_time = '2016-10-27 10:20')
+book9 = Booking.objects.create(name = 'Dima', price = 55.3, category = CategoryChoices.MOUSTACHE, is_active = True)
+book10 = Booking.objects.create(name = 'Ira', price = 66.4, description = 'I want a cut my hair', category = CategoryChoices.HAIRCUT, is_active = False, visit_time = '2016-10-26 15:30')
+
+
+Задание 2: Получить все задачи из базы данных.
+qs = Booking.objects.all()
+for book in qs: print(book.name, book.price, book.description, book.category, book.is_active, book.visit_time)
+
+
+Задание 3: Получить все бронирования, цена которых больше 100.
+qs = Booking.objects.filter(price__gt=100)
+
+
+Задание 4: Найти бронирования, в названии которых содержится строка "стрижка" без учёта регистра.
+qs = Booking.objects.filter(name__icontains='стрижка')
+
+
+Задание 5: Получить бронирования, название которых начинается с "Муж", без учёта регистра.
+qs = Booking.objects.filter(name__istartswith='Муж')
+
+
+Задание 6: Получить все бронирования, у которых не указано время визита.
+qs = Booking.objects.filter(visit_time = None)
+
+
+Задание 7: Получить активные бронирования определённой категории, например HAIRCUT, цена которых не превышает 100
+qs = Booking.objects.filter(is_active = True, category = CategoryChoices.HAIRCUT, price__lte=100)
+
+
+Задание 8: Получить все бронирования, относящиеся к категориям  HAIRCUT и MOUSTACHE
+qs = Booking.objects.filter(category__in=(CategoryChoices.HAIRCUT, CategoryChoices.MOUSTACHE))
+
+
+Задание 9: Получить все бронирования, кроме неактивных записей с ценой меньше 50.
+qs = Booking.objects.exclude(is_active = False, price__lt=50)
+
+
+Задание 10: Найти все бронирования, созданные сегодня
+import datetime
+qs = Booking.objects.filter(created_at__date=datetime.date.today())
+
+
+Задание 11: Увеличить или изменить цену всех бронирований определённой категории на фиксированное значение, например установить цену 120.
+qs = Booking.objects.filter(category = CategoryChoices.MASSAGE).update(price = 120)
+qs = Booking.objects.filter(category = CategoryChoices.MASSAGE).update(price = F('price') + 120)
+
+
+Задание 12: Сделать все бронирования с ценой выше 200 неактивными.
+qs = Booking.objects.filter(price__gt=200).update(is_active=False)
+
+
+Задание 13: Для всех бронирований, у которых visit_time не указан, установить is_active=False.
+qs = Booking.objects.filter(visit_time=None).update(is_active=False)
+
+
+Задание 14: Удалить все неактивные бронирования, цена которых меньше 20.
+qs = Booking.objects.filter(is_active=False, price__lt=20).delete()
