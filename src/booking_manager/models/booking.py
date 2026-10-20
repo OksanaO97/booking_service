@@ -27,8 +27,8 @@ class Booking(BaseModel):
         null=True,
     )
 
-    barber = models.ForeignKey(to='account.Barber', related_name='bookings', on_delete=models.SET_NULL, null=True, verbose_name='барбер' )
-    client = models.ForeignKey(to='account.Client', related_name='bookings', on_delete=models.SET_NULL, null=True, verbose_name='клиент')
+    barber = models.ForeignKey(to='account.Barber', related_name='bookings', on_delete=models.SET_NULL, null=True, blank=True, verbose_name='барбер' )
+    client = models.ForeignKey(to='account.Client', related_name='bookings', on_delete=models.SET_NULL, null=True, blank=True, verbose_name='клиент')
     objects = BookingManager()
 
 

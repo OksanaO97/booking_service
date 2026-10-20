@@ -4,3 +4,7 @@ from django.apps import AppConfig
 class BookingManagerConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'booking_manager'
+    verbose_name = 'Менеджер бронирований'
+    verbose_name_plural = 'Менеджер бронирований'
+
+

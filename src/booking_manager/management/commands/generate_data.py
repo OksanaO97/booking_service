@@ -54,7 +54,8 @@ class Command(BaseCommand):
                 Barber(
                     user=all_users[i],
                     barbershop=random.choice(all_barbershops),
-                    experience_year=random.randint(1, 10)
+                    experience_year=random.randint(1, 10),
+                    rating=random.randint(1, 5)
                 )
             )
         Barber.objects.bulk_create(barbers)
@@ -187,7 +188,8 @@ class Command(BaseCommand):
                     text=random.choice(com_texts),
                     client=booking.client,
                     barber=booking.barber,
-                    booking=booking
+                    booking=booking,
+                    rating = random.randint(1, 5)
                 )
             )
         Comment.objects.bulk_create(comments)
