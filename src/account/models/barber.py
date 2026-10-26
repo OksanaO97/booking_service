@@ -14,3 +14,9 @@ class Barber(BaseModel, RatingMixin):
         db_table = "barbers"
         verbose_name = "Барбер"
         verbose_name_plural = "Барберы"
+
+
+
+
+    def __str__(self):
+            return self.user.first_name if self.user.first_name else self.user.usernam

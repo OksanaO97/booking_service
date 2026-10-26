@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import services, home, specialists, bookings, new_booking, detail_view
+from .views import services, home, specialists, bookings, new_booking, detail_view, comment_form, booking_service_form
 
 urlpatterns = [
     path('services/', services, name = 'services'),
@@ -8,7 +8,9 @@ urlpatterns = [
     path('specialists/', specialists, name = 'specialists'),
     path('bookings/', bookings, name = 'bookings'),
     path('newbooking/', new_booking, name = 'new_booking'),
-    path('bookings/<int:booking_id>/', detail_view, name='booking_detail')
+    path('bookings/<int:booking_id>/', detail_view, name='booking_detail'),
+    path('commentform/', comment_form, name='comment_form'),
+    path('bookingserviceform/', booking_service_form, name='booking_service_form')
 
 ]
 

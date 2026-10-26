@@ -1,12 +1,16 @@
 from django.db import models
 from core.models import BaseModel
 from booking_manager.models.managers.booking import BookingManager
+from django.utils import timezone
+
+from booking_manager.validators import NameValidator
 
 class Booking(BaseModel):
     name = models.CharField(
         max_length=30,
         verbose_name='наименование',
-        unique=True
+        unique=True,
+        validators=[NameValidator()]
     )
     is_active = models.BooleanField(
         verbose_name='активна',
@@ -15,7 +19,9 @@ class Booking(BaseModel):
     )
     visit_time = models.DateTimeField(
         verbose_name='время записи',
-        null = True
+        null=True,
+        blank=True,
+        default=timezone.now
     )
 
 
@@ -25,6 +31,12 @@ class Booking(BaseModel):
         related_name='bookings',
         verbose_name='услуги',
         null=True,
+    )
+
+    description = models.CharField(
+        max_length=100,
+        verbose_name='описание',
+        blank=True
     )
 
     barber = models.ForeignKey(to='account.Barber', related_name='bookings', on_delete=models.SET_NULL, null=True, blank=True, verbose_name='барбер' )
