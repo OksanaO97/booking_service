@@ -14,4 +14,3 @@ class ProductBooking(BaseModel):
         verbose_name_plural = 'товары в бронированиях'
 
 
-

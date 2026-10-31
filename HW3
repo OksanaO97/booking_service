@@ -31,7 +31,7 @@ qs = Booking.objects.filter(name__istartswith='Муж')
 
 
 Задание 6: Получить все бронирования, у которых не указано время визита.
-qs = Booking.objects.filter(visit_time = None)
+qs = Booking.objects.filter(visit_time__isnull = True)
 
 
 Задание 7: Получить активные бронирования определённой категории, например HAIRCUT, цена которых не превышает 100
@@ -61,7 +61,7 @@ qs = Booking.objects.filter(price__gt=200).update(is_active=False)
 
 
 Задание 13: Для всех бронирований, у которых visit_time не указан, установить is_active=False.
-qs = Booking.objects.filter(visit_time=None).update(is_active=False)
+qs = Booking.objects.filter(visit_time__isnull = True).update(is_active=False)
 
 
 Задание 14: Удалить все неактивные бронирования, цена которых меньше 20.

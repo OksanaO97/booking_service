@@ -19,4 +19,4 @@ class Barber(BaseModel, RatingMixin):
 
 
     def __str__(self):
-            return self.user.first_name if self.user.first_name else self.user.usernam
+            return self.user.first_name if self.user.first_name else self.user.username

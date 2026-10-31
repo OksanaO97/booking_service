@@ -1,5 +1,6 @@
 from django.db import models
 from core.models import BaseModel
+from booking_manager.models.managers.product import ProductManager
 
 
 
@@ -16,6 +17,8 @@ class Product(BaseModel):
         related_name='products',
         through='ProductBooking'
     )
+
+    objects = ProductManager()
 
     class Meta:
         db_table = 'products'

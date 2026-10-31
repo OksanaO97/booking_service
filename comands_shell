@@ -164,3 +164,73 @@ booking[0].products.add(product)
 
 Чтобы проверить все продукты в конкретном бронировании
 bookings[0].products.all()
+
+Annotate и aggregate
+
+Считаем общую цену на все услуги:
+result_dict = BookingService.objects.aggregate(total_price=Avg("price"))
+average_value = result_dict["total_price"]
+
+Чтобы посчитать минимальную, среднюю и максимальную цену
+BookingService.objects.aggregate(Avg('price'), Min('price'), Max('price'))
+
+Чтобы посчитать общее количество заполненных цен во всей таблице услуг
+BookingService.objects.aggregate(Count('price'))
+
+Тоже возвращает общее количество заполненных цен во всей таблице услуг
+BookingService.objects.count()
+
+находит разницу между ценой самой дорогой книги в базе данных и средней стоимостью всех книг
+Book.objects.aggregate(price_diff=Max("price", output_field=FloatField()) - Avg("price"))
+
+считает среднюю стоимость в тех записях, где стоимость больше или равно 20
+BookingService.objects.filter(price__gte=20).aggregate(Avg('price'))
+
+запрос считает, сколько всего записей на приём (бронирований) оформлено на те услуги, стоимость которых составляет 20 и более единиц
+BookingService.objects.filter(price__gte=20).aggregate(count_book=Count('bookings'))
+
+Этот запрос добавляет к каждой отдельной услуге в вашей базе данных виртуальное,
+посчитанное на лету поле, в котором будет храниться количество бронирований именно на эту конкретную услугу
+ services = BookingService.objects.annotate(Count("bookings"))
+ for s in services:
+    print(f"Услуга: {s.name} --- Количество записей: {s.bookings__count}")
+
+Этот запрос добавляет к каждой отдельной услуге виртуальное поле, в котором будет храниться количество категорий, связанных с этой услугой
+services = BookingService.objects.annotate(Count("category"))
+for s in services: print(f"Услуга: {s.name} --- Количество категорий: {s.category__count}")
+
+Этот запрос прикрепит к каждому бронированию количество услуг на это бронирование
+bs = Booking.objects.annotate(Count('booking_service'))
+for s in bs: print(f"Бронирование: {s.name} --- Количество услуг: {s.booking_service__count}")
+Альтернативный вариант
+bs = Booking.objects.annotate(bs_count = Count('booking_service'))
+bs[0].bs_count
+
+Этот запрос прикрепит к каждому бронированию количество товаров у этого бронирования
+bookings = Booking.objects.annotate(all_products = Count('products'))
+bookings[1].all_products
+
+Посчитаем количество бронирований у каждого товара
+product = Product.objects.annotate(count_book = Count('bookings'))
+product[0].count_book
+
+Этот запрос находит и возвращает список всех товаров, которые были добавлены строго к двум или более бронированиям (чекам)
+product = Product.objects.annotate(count_book = Count('bookings')).filter(count_book__gte=2)
+Чтобы посмотреть, сколько таких продуктов
+len(product)
+
+Этот запрос возвращает товары, которые были куплены 2 или более раз [1.3] и стоят больше или равно,
+чем средняя цена вообще всех товаров, представленных на вашем складе [1.3].
+product = Product.objects.annotate(count_book = Count('bookings')).filter(count_book__gte=2, price__gte=Avg('price'))
+
+сырой запрос
+books = Booking.objects.raw('SELECT * FROM "bookings"')
+for book in books: print(book.name)
+
+правильный raw запрос
+books = Booking.objects.raw(""" SELECT * FROM bookings WHERE is_active = %s""", [is_active])
+
+
+
+
+

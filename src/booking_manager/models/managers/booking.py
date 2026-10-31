@@ -10,8 +10,6 @@ class BookingQuerySet(models.QuerySet):
         )
 
 
-
-
 class BookingManager(models.Manager):
     def get_queryset(self):
         return BookingQuerySet(self.model, using=self._db)
