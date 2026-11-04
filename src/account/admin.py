@@ -3,7 +3,12 @@ from .models import User, Client, Barber
 from booking_manager.models import Comment
 
 admin.site.register(User)
-admin.site.register(Client)
+
+@admin.register(Client)
+class ClientAdmin(admin.ModelAdmin):
+    search_fields = ("user__email", "user__username", "user__first_name")
+    list_display = ("id", "user", "status", "date_of_birth")
+
 
 class CommentInline(admin.TabularInline):
     model = Comment

@@ -198,6 +198,3 @@ books = Booking.objects.filter(products__name='Шампунь', barber__experien
 
 
 
-
-
-

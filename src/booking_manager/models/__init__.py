@@ -6,3 +6,4 @@ from .barbershop import Barbershop
 from .comment import Comment
 from .promotion import Promotion
 from .promotion_booking_service import PromotionBookingService
+from .product_stock import ProductStock

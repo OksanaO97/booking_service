@@ -14,6 +14,18 @@
         <li><strong>Date and time:</strong> <span class="text-primary">{{ booking.visit_time }}</span></li>
     </ul>
 
+    <div class="card shadow-sm border-0 bg-white p-4 rounded-3 my-4 border-start border-3 border-primary">
+        <h5 class="fw-bold mb-2">Transfer to Another Barber</h5>
+        <p class="text-muted small">Select a specialist. The system will automatically check if their time is free.</p>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{ barber_form | crispy }}
+            <button type="submit" name="change_barber" class="btn btn-primary w-100 fw-medium py-2 mt-2 text-uppercase shadow-sm">
+                Transfer Booking
+            </button>
+        </form>
+    </div>
+
     <hr class="my-4">
 
     <h5 class="fw-bold mb-3">Added Products & Quantity:</h5>
@@ -26,12 +38,12 @@
         <p class="text-muted fst-italic">No products added to this booking.</p>
     {% endfor %}
 
-      <div class="card shadow-sm border-0 bg-white p-4 rounded-3 my-4">
+    <div class="card shadow-sm border-0 bg-white p-4 rounded-3 my-4 border-start border-3 border-success">
         <h5 class="fw-bold mb-3">Add Product to this Booking</h5>
         <form method="post" novalidate>
             {% csrf_token %}
             {{ form | crispy }}
-            <button type="submit" class="btn btn-success w-100 fw-medium py-2 mt-3 text-uppercase shadow-sm">
+            <button type="submit" name="add_product" class="btn btn-success w-100 fw-medium py-2 mt-3 text-uppercase shadow-sm">
                 Add Product
             </button>
         </form>

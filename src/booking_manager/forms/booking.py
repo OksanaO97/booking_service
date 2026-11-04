@@ -1,7 +1,8 @@
-from ..models import Booking, ProductBooking
+from ..models import Booking, ProductBooking, Product, ProductBooking
 from django import forms
 from django.utils import timezone
 from django.core.exceptions import ValidationError
+
 
 class BookingForm(forms.ModelForm):
     visit_time = forms.DateTimeField(
@@ -41,7 +42,9 @@ class BookingForm(forms.ModelForm):
                 raise ValidationError(
                     {"visit_time": "This barber is already busy at the specified time. Please choose another one!"}
                 )
+
         return cleaned_data
+
 
 
 class ProductBookingForm(forms.ModelForm):
@@ -63,11 +66,14 @@ class ProductBookingForm(forms.ModelForm):
             raise ValidationError(
                 {"quantity": "The quantity cannot be negative or equal to 0"}
             )
+
         if quantity and product:
             actual_amount = getattr(product, 'amount', 0)
             if quantity > actual_amount:
                 raise ValidationError(
                     {"quantity": f"Not enough stock! Only {actual_amount} items available in store"}
                 )
+
+
         return cleaned_data
 

@@ -4,9 +4,9 @@ from core.models import BaseModel, RatingMixin
 
 
 class Barber(BaseModel, RatingMixin):
-    experience_year = models.IntegerField(verbose_name='опыт')
+    experience_year = models.IntegerField(verbose_name='опыт', null=True, blank=True)
     user = models.OneToOneField(to='account.User', related_name='barber', on_delete=models.CASCADE, verbose_name='пользователь')
-    barbershop = models.ForeignKey(to='booking_manager.Barbershop', related_name='barbers', on_delete=models.CASCADE, verbose_name='филиал')
+    barbershop = models.ForeignKey(to='booking_manager.Barbershop', related_name='barbers', on_delete=models.CASCADE, verbose_name='филиал', null=True)
 
 
     class Meta:

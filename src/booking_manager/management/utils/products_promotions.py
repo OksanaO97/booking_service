@@ -22,10 +22,10 @@ def create_products_promotions(fake, created_booking_services):
         "Расческа для бороды",
     ]
     products = []
-    for i in range(50):
+    for name in product_names:
         products.append(
             Product(
-                name=random.choice(product_names),
+                name=name,
                 description=fake.text(max_nb_chars=150),
                 price=random.randint(10, 100) * 10,
                 amount=random.randint(0, 100)
@@ -55,8 +55,10 @@ def create_products_promotions(fake, created_booking_services):
 
     # Добавдяем акции на услуги
     pbs = []
+    services_count = len(created_booking_services)
     for pr in created_promotions:
-        un_services = random.sample(created_booking_services, random.randint(2, 5))
+        sample_size = min(services_count, random.randint(2, 5))
+        un_services = random.sample(created_booking_services, sample_size) if sample_size > 0 else []
         for bs in un_services:
             pbs.append(
                 PromotionBookingService(
@@ -65,7 +67,8 @@ def create_products_promotions(fake, created_booking_services):
                     discount_percent=random.choice([5, 10, 20, 30, 50])
                 )
             )
-    PromotionBookingService.objects.bulk_create(pbs)
+    PromotionBookingService.objects.bulk_create(pbs, ignore_conflicts=True)
+
 
 
     return  created_products, created_promotions

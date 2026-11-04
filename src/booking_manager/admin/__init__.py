@@ -4,3 +4,4 @@ from .booking_service import BookingServiceAdmin
 from .barbershop import BarbershopAdmin
 from .comment import CommentAdmin
 from .promotion import PromotionAdmin
+from .stock import ProductStockAdmin

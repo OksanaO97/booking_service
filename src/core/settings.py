@@ -91,6 +91,7 @@ DATABASES = {
         'PASSWORD': env('DB_PASSWORD'),
         'HOST': env('DB_HOST'),
         'PORT': env('DB_PORT'),
+        'ATOMIC_REQUESTS': True,
     }
 }
 
@@ -150,3 +151,5 @@ MAILERS = {
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+LOGIN_URL = '/admin/login/'
