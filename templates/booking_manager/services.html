@@ -1,0 +1,30 @@
+{% extends "booking_manager/base.html" %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Our Services</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for service in services %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">{{ service.name }}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Category:</strong> {{ service.category }}</li>
+                    <li class="list-group-item"><strong>Duration:</strong> {{ service.duration }} min</li>
+                    <li class="list-group-item"><strong>Price:</strong> ${{ service.price }}</li>
+                </ul>
+                <div class="card-body text-center">
+                    <a href="{% url 'specialists' %}" class="btn btn-primary w-100">View Specialists</a>
+                </div>
+            </div>
+               </div>
+        {% empty %}
+        <p class="text-center">No services found.</p>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}
+
+

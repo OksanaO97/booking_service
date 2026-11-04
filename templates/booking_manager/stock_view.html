@@ -1,0 +1,54 @@
+{% extends "booking_manager/base.html" %}
+{% block content %}
+<div class="container my-5" style="max-width: 900px;">
+
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold m-0">Inventory Dashboard: Product Stocks</h3>
+        <a href="{% url 'stock_form' %}" class="btn btn-warning fw-medium text-dark shadow-sm">
+             Move Product Stock
+        </a>
+    </div>
+
+
+    <div class="table-responsive shadow-sm rounded-3">
+        <table class="table table-hover align-middle bg-white m-0">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col" class="ps-4">Product Name</th>
+                    <th scope="col">Barbershop (Branch)</th>
+                    <th scope="col" class="text-center pe-4">Available Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in productstock %}
+                <tr>
+
+                    <td class="fw-semibold ps-4 text-secondary">{{ stock.product.name }}</td>
+
+
+                    <td>{{ stock.barbershop.name }}</td>
+
+
+                    <td class="text-center pe-4 fw-bold {% if stock.stock == 0 %}text-danger{% else %}text-success{% endif %}">
+                        {{ stock.stock }} pcs
+                    </td>
+                </tr>
+                {% empty %}
+
+                <tr>
+                    <td colspan="3" class="text-muted text-center py-5 fst-italic">
+                        No product stocks found registered in the database.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="mt-4 text-end">
+        <a href="{% url 'bookings' %}" class="btn btn-outline-dark">Back to Bookings</a>
+    </div>
+</div>
+{% endblock %}
