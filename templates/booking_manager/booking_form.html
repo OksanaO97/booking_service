@@ -1,11 +1,18 @@
 {% extends "booking_manager/base.html" %}
 {% load crispy_forms_tags %}
+
 {% block content %}
+<div class="container my-5" style="max-width: 600px;">
+    <div class="card shadow-sm p-4 rounded-3">
+        <form method="post" novalidate>
+            {% csrf_token %}
 
-<form method="post">
-{% csrf_token %}
-    {{ form | crispy }}
-    <input type="submit" value="Submit">
-</form>
+            {{ form|crispy }}
 
+            <button type="submit" class="btn btn-warning w-100 fw-bold text-dark py-2 mt-3 text-uppercase shadow-sm">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
 {% endblock %}

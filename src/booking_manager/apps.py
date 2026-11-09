@@ -18,4 +18,6 @@ class BookingManagerConfig(AppConfig):
         from booking_manager.signals import bookings_products_signal
         from booking_manager.signals import users_clients_signal
         from booking_manager.signals import clients_booking_signal
+        from booking_manager.signals import booking_service_cash_signal
+        from booking_manager.signals import client_profile_signal
 

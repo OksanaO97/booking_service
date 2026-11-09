@@ -1,30 +1,71 @@
 {% extends "booking_manager/base.html" %}
+
+{% load cache %}
+
 {% block content %}
 <div class="container my-5">
-    <h2 class="text-center mb-4">Our Services</h2>
+    <h2 class="text-center mb-5 fw-bold text-dark">Popular Services</h2>
+
+    {% cache 600 sidebar_final_release using="filesystem" %}
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-5 p-3 rounded border" style="background-color: #f8f9fa; border-color: rgba(0, 0, 0, 0.08) !important;">
+        {% for service in popular_services %}
+        <div class="col">
+            <div class="card h-100 shadow-sm border" style="border-color: rgba(0, 0, 0, 0.12) !important; border-width: 1px !important; border-style: solid !important; background-color: #ffffff !important;">
+                <div class="card-body text-center rounded">
+                    <h5 class="card-title fw-bold text-dark">{{ service.name }}</h5>
+                    <span class="badge bg-warning text-dark mb-2 px-3 py-1 rounded-pill fw-bold">Popular</span>
+                    <p class="small mb-2 text-muted">Category: {{ service.category }}</p>
+
+                    <p class="fw-bold fs-4 m-0 text-warning-emphasis">${{ service.price }}</p>
+
+                    <div class="border-top pt-3 mt-3" style="border-color: rgba(0, 0, 0, 0.08) !important;">
+                        <a href="{% url 'specialists' %}" class="btn btn-warning w-100 text-dark fw-bold">View Specialists</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center text-muted fst-italic">No popular services found.</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endcache %}
+
+    <hr class="my-5" style="border-color: rgba(0, 0, 0, 0.08) !important;">
+
+    <h3 class="fw-bold mb-4 text-dark">All Our Services</h3>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for service in services %}
         <div class="col">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold">{{ service.name }}</h5>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong>Category:</strong> {{ service.category }}</li>
-                    <li class="list-group-item"><strong>Duration:</strong> {{ service.duration }} min</li>
-                    <li class="list-group-item"><strong>Price:</strong> ${{ service.price }}</li>
-                </ul>
-                <div class="card-body text-center">
-                    <a href="{% url 'specialists' %}" class="btn btn-primary w-100">View Specialists</a>
+            <div class="card h-100 shadow-sm border" style="border-color: rgba(0, 0, 0, 0.12) !important; border-width: 1px !important; border-style: solid !important; background-color: #ffffff !important;">
+                <div class="card-body text-center rounded">
+                    <h5 class="card-title fw-bold text-dark">{{ service.name }}</h5>
+                    <p class="small text-muted">Duration: {{ service.duration }} min</p>
+
+                    <p class="fw-bold fs-4 mb-3 text-warning-emphasis">${{ service.price }}</p>
+
+                    <div class="border-top pt-3" style="border-color: rgba(0, 0, 0, 0.08) !important;">
+                        <a href="{% url 'specialists' %}" class="btn btn-warning w-100 text-dark fw-bold">View Specialists</a>
+                    </div>
                 </div>
             </div>
-               </div>
+        </div>
         {% empty %}
-        <p class="text-center">No services found.</p>
+        <div class="col-12">
+            <p class="text-center text-muted fst-italic">No services available.</p>
+        </div>
         {% endfor %}
-
     </div>
 </div>
 {% endblock %}
+
+
+
+
+
+
+
+
 
 

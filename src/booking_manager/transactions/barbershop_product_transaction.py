@@ -4,7 +4,7 @@ from booking_manager.models import ProductStock
 
 def move_product_transaction(product_id, barbershop_from, barbershop_to, quantity):
     if quantity <= 0:
-       raise ValidationError('The quantity cannot be negative or equal to 0')
+       raise ValidationError({'quantity':'The quantity cannot be negative or equal to 0'})
 
     if barbershop_to.id == barbershop_from.id:
         raise ValidationError('Source and destination barbershops cannot be the same')
@@ -28,9 +28,9 @@ def move_product_transaction(product_id, barbershop_from, barbershop_to, quantit
             stock_to = first_stock
 
         if stock_from.stock < quantity:
-            raise ValidationError(
-                f"Not enough stock at the source barbershop! Available: {stock_from.stock} items, requested: {quantity} items."
-            )
+            raise ValidationError({
+                'quantity':f"Not enough stock at the source barbershop! Available: {stock_from.stock} items, requested: {quantity} items."
+            })
 
         stock_from.stock -= quantity
         stock_to.stock += quantity

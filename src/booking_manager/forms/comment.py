@@ -1,22 +1,20 @@
 from django import forms
-from account.models import Barber
+from booking_manager.models import Comment
 
 
 
-class CommentForm(forms.Form):
-    barber = forms.ModelChoiceField(queryset=Barber.objects.all(),label="Barber's Name")
-    rating = forms.IntegerField(
-        label="Rating",
-        widget=forms.NumberInput(attrs={'min': 1, 'max': 5, 'class': 'form-control'}),
-    )
-    text = forms.CharField(
-        label="Comment Text",
-        max_length=100,
-        widget=forms.Textarea(
-            attrs={
-                'cols':50,
-                'rows':5,
-                'class': 'form-control'
-            }
-        )
-    )
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["barber", "rating", "text"]
+
+
+        widgets = {
+            'rating': forms.NumberInput(attrs={'min': 1, 'max': 5, 'class': 'form-control'}),
+            'text': forms.Textarea(attrs={'cols': 50, 'rows': 5, 'class': 'form-control'}),
+        }
+        labels = {
+            'barber': "Barber's Name",
+            'rating': "Rating",
+            'text': "Comment Text",
+        }

@@ -1,0 +1,43 @@
+{% extends "booking_manager/base.html" %}
+
+{% block content %}
+<div class="container my-5 d-flex justify-content-center">
+
+    <div class="card shadow-sm border-0 bg-white p-4 rounded-3" style="max-width: 450px; width: 100%;">
+
+        <div class="text-center mb-3">
+            <h3 class="fw-bold text-dark m-0">Client Profile</h3>
+        </div>
+
+        <hr class="text-muted my-2">
+
+
+        <div class="card-body p-2">
+            <ul class="list-unstyled fs-5 lh-lg m-0">
+                <li class="d-flex justify-content-between border-bottom py-2">
+                    <span class="text-muted">Client Name:</span>
+                    <span class="fw-semibold text-dark">{{ profile.client_name }}</span>
+                </li>
+                <li class="d-flex justify-content-between border-bottom py-2">
+                    <span class="text-muted">Status:</span>
+                    <span class="badge bg-success align-self-center px-3 py-2 rounded-pill">
+                        {{ profile.status|default:"Active" }}
+                    </span>
+                </li>
+                <li class="d-flex justify-content-between py-2">
+                    <span class="text-muted">Total Bookings:</span>
+                    <span class="fw-bold text-primary fs-4_lh-1">{{ profile.bookings }}</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Navigation button -->
+        <div class="mt-4">
+            <a href="{% url 'bookings' %}" class="btn btn-outline-dark btn-sm w-100 py-2 text-uppercase fw-medium">
+                Back to Bookings
+            </a>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "booking_manager/base.html" %}
+
+{% block content %}
+<div class="container my-5" style="max-width: 750px;">
+
+    <div class="text-center mb-5">
+        <h2 class="text-dark fw-bold">About Our Barbershop</h2>
+        <hr class="w-25 mx-auto border-2 border-warning opacity-75">
+    </div>
+
+    <div class="mb-5">
+        <p class="lead text-muted text-center mb-4">
+            Welcome to our barbershop — a place where traditional craftsmanship meets modern style.
+        </p>
+        <p class="text-muted lh-lg">
+            Founded with a passion for premium male grooming, our salon offers top-tier haircuts, beard trimming, and classic hot shaves. We believe that a visit to the barber is more than just a routine — it is an experience of relaxation, confidence, and community.
+        </p>
+        <p class="text-muted lh-lg">
+            Our team consists of certified, experienced specialists who use only premium products to ensure your hair and skin get the best possible care.
+        </p>
+    </div>
+        <div class="text-center">
+        <a href="{% url 'new_booking' %}" class="btn btn-warning btn-sm px-4 py-2 text-uppercase fw-medium text-dark shadow-sm">
+            Book an Appointment
+        </a>
+    </div>
+</div>
+{% endblock %}

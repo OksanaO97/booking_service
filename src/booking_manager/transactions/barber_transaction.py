@@ -10,7 +10,7 @@ def change_barbers_transaction(booking_item, new_barber):
        old_barber = booking_item.barber
 
        if old_barber.id == new_barber.id:
-           raise ValidationError("You cannot transfer a booking to the same barber!")
+           raise ValidationError({"barber": "You cannot transfer a booking to the same barber!"})
 
        time_to_visit = booking_item.visit_time
        duration = booking_item.booking_service.duration_minute
@@ -24,10 +24,10 @@ def change_barbers_transaction(booking_item, new_barber):
            other_book_finish = other_book.visit_time + timedelta(minutes=other_book.booking_service.duration_minute)
 
            if other_book_finish > time_to_visit:
-               raise ValidationError(
-                   f"Barber '{new_barber.user.first_name}' is busy! "
-                   f"Overlap detected with booking #{other_book.id}."
-               )
+               raise ValidationError({
+                   "barber":f"Barber '{new_barber.user.first_name}' is busy! Overlap detected with booking #{other_book.id}."
+               })
+
        booking_item.barber = new_barber
        booking_item.save()
 

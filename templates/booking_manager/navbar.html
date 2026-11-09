@@ -8,10 +8,14 @@
           <a class="nav-link" href="{% url 'bookings' %}">Bookings</a>
           <a class="nav-link" href="{% url 'new_booking' %}">New Booking</a>
           <a class="nav-link" href="{% url 'comment_form' %}">Comments</a>
+          {% if not request.user.is_staff %}
+            <a class="nav-link" href="{% url 'client_profile' %}">Client Profile</a>
+          {% endif %}
           {% if request.user.is_staff %}
               <a class="nav-link fw-semibold text-warning-emphasis ms-lg-3" href="{% url 'booking_service_form' %}">New Booking Services</a>
               <a class="nav-link fw-semibold text-warning-emphasis" href="{% url 'stock_form' %}">Move Stock</a>
               <a class="nav-link fw-semibold text-warning-emphasis" href="{% url 'stock_view' %}">Product Stocks</a>
+              <a class="nav-link fw-semibold text-warning-emphasis" href="{% url 'statistics' %}">Analytics</a>
           {% endif %}
       </div>
     </div>

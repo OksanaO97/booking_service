@@ -14,6 +14,14 @@
         <li><strong>Date and time:</strong> <span class="text-primary">{{ booking.visit_time }}</span></li>
     </ul>
 
+    {% if booking.is_active %}
+    <div class="my-4">
+        <a href="{% url 'booking_edit' booking.id %}" class="btn btn-warning text-dark w-100 fw-medium py-2 text-uppercase shadow-sm">
+            Edit Visit Time & Booking Services
+        </a>
+    </div>
+    {% endif %}
+
     <div class="card shadow-sm border-0 bg-white p-4 rounded-3 my-4 border-start border-3 border-primary">
         <h5 class="fw-bold mb-2">Transfer to Another Barber</h5>
         <p class="text-muted small">Select a specialist. The system will automatically check if their time is free.</p>
