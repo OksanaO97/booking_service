@@ -1,0 +1,236 @@
+Команды, которые мы на уроке прописывали в shell на уроке
+Заполнение таблицы данными
+book1 = Booking(name = 'book1', price = 500.30)
+book1.save()
+
+Чтобы поменять сумму
+book1.price = 22.22
+
+чтобы посмотреть новую цену
+book1.price
+
+но чтобы полетело в базу надо сделать
+book1.save()
+
+Чтобы при каждом действии не писать book1.save(), а оно сразу сохраняло в базу
+Импортируем категории
+from src.booking_manager.constants import CategoryChoices
+book
+qs
+Если мы выходили и обратно заходили в шел, чтобы дальше работать с нашими данными
+book2 = Booking.objects.get(name='book2')
+
+Чтобы сработал валидатор
+Создаем объект только в памяти (без .create())
+bad_book = Booking.objects.new(name='book4', price=-10.0, category=CategoryChoices.BEARD)
+Принудительно запускаем валидаторищщ
+bad_book.full_clean()
+
+Чтобы сделать QuerySet:
+qs = Booking.objects.all()
+qs
+
+Чтобы пройти по каждой моделе и посмотреть значения ее полей
+In [21]: for book in qs:
+    ...:     print(book.name, book.price, book.is_active)
+
+Чтобы взять конкретную запись
+book1 = qs[0]
+book1
+
+Одну запись мы можем получить через метод get
+book2 = Booking.objects.get(name = 'book1')
+
+Можно посмотреть последнюю запись
+qs = Booking.objects.last()
+qs
+
+Первый по времени создания
+qs = Booking.objects.first()
+qs
+
+update работает на все записи через qs
+qs = Booking.objects.update(is_active = False)
+
+чтобы удалить конкретную запись
+qs = Booking.objects.filter(id=3).delete()
+
+Чтобы отфильтровать по конкретному полю
+qs = Booking.objects.filter(name = 'book1')
+
+Чтобы сделать фильтр по нескольким полям. __isnull наз. look up
+qs = Booking.objects.filter(is_active = True, description__isnull = False)
+
+Чтобы найти запись, где стоимотсь больше 40
+qs = Booking.objects.filter(price__gte=40)
+
+Меньше или равно
+qs = Booking.objects.filter(price__lte=40)
+
+Строго меньше
+qs = Booking.objects.filter(price__lt=40)
+
+Строго больше
+qs = Booking.objects.filter(price__gt=100)
+
+Значение между, указываем начало и конец
+qs = Booking.objects.filter(price__range=(20, 50))
+
+Вхождение какое-то
+qs = Booking.objects.filter(category__in=("CategoryChoices.MASSAGE", "CategoryChoices.BEARD"))
+
+Чтобы показало только первые 3 записи
+qs = Booking.objects.filter(price__range=(20, 50))[:3]
+
+Чтобы взяло после 1 записи еще 2
+qs = Booking.objects.filter(price__range=(20, 50))[1:3]
+
+Чтоы посмотреть соответствие дате
+qs = Booking.objects.filter(created_at__month__gte=9)
+
+Чтобы найти бронирования, в названии которых содержится строка "стрижка" без учёта регистра.
+qs = Booking.objects.filter(name__icontains="haircut")
+
+
+Создаем нового пользователя
+Шифруем пароль с помощью нашей функции для этого
+User.objects.create_user('client1@client.com', 'client1')
+User.objects.create_user('barber2@barber.com', 'barber2')
+
+Чтобы из пользователя создать клиента:
+Получаем первого пользователя
+
+user = User.objects.get(email = 'client1@client.com')
+Создаем клиента
+Client.objects.create(user=user)
+
+Создаем  барбера
+user = User.objects.get(email = 'barber2@barber.com')
+Barber.objects.create(user=user, experience_year = 5)
+
+Создаем услугу:
+BookingService.objects.create(name = 'Стрижка одной насадкой', price = 15, duration_minute = 15)
+
+Реализуем само бронирование
+Для начала получим клиента
+client1 = Client.objects.get(user__email = 'client1@client.com')
+Также получаем барбера
+barber1 = Barber.objects.get(user__email = 'barber1@barber.com')
+Получаем услугу
+booking_service1 = BookingService.objects.get(id = 1)
+Создаем бронирование
+Booking.objects.create(name = 'Бронирование1', booking_service = booking_service1, barber = barber1, client = client1)
+
+Получаем все бронирования
+bookings = Booking.objects.all()
+
+Чтобы посмотреть статус клиента через бронирования
+bookings[1].client.status
+
+Чтобы через клиента посмотреть эмейл
+bookings[1].client.user.email
+
+Чтобы посмотреть услугу через бронирования
+bookings[1].booking_service
+Или наименование услуги
+bookings[1].booking_service.name
+
+Чтобы с клиента посмотреть все свои звказы
+client1.bookings.all()
+
+Можно тогда любой фильтр делать
+client1.bookings.filter(name__startswith = 'Бро')
+
+Чтобы добраться через бронироние до пользователя с такой почтой и узнать его бронирования
+book1 = client1.bookings.filter(barber__user__email = 'barber1@barber.com')
+
+чтобы через барбера получить эмеил пользователя
+barber2 = Barber.objects.get(id = 2)
+barber2.user.email
+
+Чтобы получить бронирования, связанные с барбером2
+bookings = client1.bookings.filter(barber = barber2)
+
+Посоздаем бронирования
+bookings = Booking.objects.create(name = 'book3')
+
+Посмотрим все наши бронирования
+bookings = Booking.objects.all()
+bookings
+
+Чтоб добавить продукты в бронирование
+product = Product.objects.last()
+booking[0].products.add(product)
+
+Чтобы проверить все продукты в конкретном бронировании
+bookings[0].products.all()
+
+Annotate и aggregate
+
+Считаем общую цену на все услуги:
+result_dict = BookingService.objects.aggregate(total_price=Avg("price"))
+average_value = result_dict["total_price"]
+
+Чтобы посчитать минимальную, среднюю и максимальную цену
+BookingService.objects.aggregate(Avg('price'), Min('price'), Max('price'))
+
+Чтобы посчитать общее количество заполненных цен во всей таблице услуг
+BookingService.objects.aggregate(Count('price'))
+
+Тоже возвращает общее количество заполненных цен во всей таблице услуг
+BookingService.objects.count()
+
+находит разницу между ценой самой дорогой книги в базе данных и средней стоимостью всех книг
+Book.objects.aggregate(price_diff=Max("price", output_field=FloatField()) - Avg("price"))
+
+считает среднюю стоимость в тех записях, где стоимость больше или равно 20
+BookingService.objects.filter(price__gte=20).aggregate(Avg('price'))
+
+запрос считает, сколько всего записей на приём (бронирований) оформлено на те услуги, стоимость которых составляет 20 и более единиц
+BookingService.objects.filter(price__gte=20).aggregate(count_book=Count('bookings'))
+
+Этот запрос добавляет к каждой отдельной услуге в вашей базе данных виртуальное,
+посчитанное на лету поле, в котором будет храниться количество бронирований именно на эту конкретную услугу
+ services = BookingService.objects.annotate(Count("bookings"))
+ for s in services:
+    print(f"Услуга: {s.name} --- Количество записей: {s.bookings__count}")
+
+Этот запрос добавляет к каждой отдельной услуге виртуальное поле, в котором будет храниться количество категорий, связанных с этой услугой
+services = BookingService.objects.annotate(Count("category"))
+for s in services: print(f"Услуга: {s.name} --- Количество категорий: {s.category__count}")
+
+Этот запрос прикрепит к каждому бронированию количество услуг на это бронирование
+bs = Booking.objects.annotate(Count('booking_service'))
+for s in bs: print(f"Бронирование: {s.name} --- Количество услуг: {s.booking_service__count}")
+Альтернативный вариант
+bs = Booking.objects.annotate(bs_count = Count('booking_service'))
+bs[0].bs_count
+
+Этот запрос прикрепит к каждому бронированию количество товаров у этого бронирования
+bookings = Booking.objects.annotate(all_products = Count('products'))
+bookings[1].all_products
+
+Посчитаем количество бронирований у каждого товара
+product = Product.objects.annotate(count_book = Count('bookings'))
+product[0].count_book
+
+Этот запрос находит и возвращает список всех товаров, которые были добавлены строго к двум или более бронированиям (чекам)
+product = Product.objects.annotate(count_book = Count('bookings')).filter(count_book__gte=2)
+Чтобы посмотреть, сколько таких продуктов
+len(product)
+
+Этот запрос возвращает товары, которые были куплены 2 или более раз [1.3] и стоят больше или равно,
+чем средняя цена вообще всех товаров, представленных на вашем складе [1.3].
+product = Product.objects.annotate(count_book = Count('bookings')).filter(count_book__gte=2, price__gte=Avg('price'))
+
+сырой запрос
+books = Booking.objects.raw('SELECT * FROM "bookings"')
+for book in books: print(book.name)
+
+правильный raw запрос
+books = Booking.objects.raw(""" SELECT * FROM bookings WHERE is_active = %s""", [is_active])
+
+
+
+
+

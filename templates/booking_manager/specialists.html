@@ -1,0 +1,27 @@
+{% extends "booking_manager/base.html" %}
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4 fw-bold" style="color: var(--text-light);">Our Specialists</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for specialist in specialists %}
+        <div class="col">
+             <div class="card h-100 text-center shadow-sm">
+
+
+                 <div class="card-body pt-4">
+                     <h5 class="card-title fw-bold" style="color: var(--text-light);">{{ specialist.user.first_name }}</h5>
+                     <p class="card-text small mb-4" style="color: var(--text-muted);">Experience: {{ specialist.experience_year }} years</p>
+
+                     <a href="{% url 'barber_detail_view' specialist.pk %}" class="btn btn-warning btn-sm w-100 text-dark fw-bold">Detail View</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center text-muted fst-italic">No specialists found.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

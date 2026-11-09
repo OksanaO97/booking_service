@@ -1,0 +1,38 @@
+{% extends "booking_manager/base.html" %}
+
+{% block content %}
+<div class="container my-5" style="max-width: 750px;">
+
+    <div class="text-center mb-5">
+        <h2 class="text-dark fw-bold"> Our Contacts </h2>
+        <hr class="w-25 mx-auto border-2 border-warning opacity-75">
+    </div>
+
+    <div class="bg-light p-5 rounded-3 border border-light-subtle mb-5 shadow-sm">
+        <h4 class="fw-bold text-dark mb-4 text-center text-uppercase tracking-wide">Visit Us</h4>
+
+
+        <div class="row text-center text-muted g-4">
+            <div class="col-sm-4">
+                <strong class="text-dark d-block mb-1">Working Hours:</strong>
+                Daily: 9:00 AM - 9:00 PM
+            </div>
+            <div class="col-sm-4 border-start border-end border-light-subtle px-2">
+                <strong class="text-dark d-block mb-1">Location:</strong>
+                123 Barber Street, City Center
+            </div>
+            <div class="col-sm-4">
+                <strong class="text-dark d-block mb-1">Contact:</strong>
+                +375 (29) 894-22-34
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a href="{% url 'new_booking' %}" class="btn btn-warning btn-sm px-4 py-2 text-uppercase fw-medium text-dark shadow-sm">
+            Book an Appointment
+        </a>
+    </div>
+
+</div>
+{% endblock %}

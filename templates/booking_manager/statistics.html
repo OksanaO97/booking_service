@@ -1,0 +1,55 @@
+{% extends "booking_manager/base.html" %}
+
+{% block content %}
+<div class="container my-5">
+
+    <div class="text-center mb-5">
+        <h2 class="text-dark m-0">Administrative Analytics</h2>
+        <p class="text-muted small">Current Month Performance & Financial Metrics</p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+
+        <div class="col">
+            <div class="card h-100 shadow-sm border border-light-subtle">
+                <div class="card-body text-center bg-white rounded-3 p-4">
+                    <span class="text-uppercase text-muted small fw-medium">Total Bookings</span>
+                    <h1 class="display-5 fw-bold text-dark my-3">{{ stat.bookings }}</h1>
+                    <p class="card-text text-muted small m-0">Completed appointments</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col">
+            <div class="card h-100 shadow-sm border border-light-subtle">
+                <div class="card-body text-center bg-white rounded-3 p-4">
+                    <span class="text-uppercase text-muted small fw-medium">Total Revenue</span>
+                    <h1 class="display-5 fw-bold text-success my-3">${{ stat.revenue }}</h1>
+                    <p class="card-text text-muted small m-0">Gross earnings from services</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col">
+            <div class="card h-100 shadow-sm border border-light-subtle">
+                <div class="card-body text-center bg-white rounded-3 p-4">
+                    <span class="text-uppercase text-muted small fw-medium">Average Rating</span>
+                    <h1 class="display-5 fw-bold text-warning my-3">★ {{ stat.rating }}</h1>
+                    <p class="card-text text-muted small m-0">Active barbers performance</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="{% url 'homepage' %}" class="btn btn-outline-dark btn-sm px-4 py-2 text-uppercase fw-medium">
+            Return to Dashboard
+        </a>
+    </div>
+
+</div>
+{% endblock %}
